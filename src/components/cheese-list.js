@@ -1,16 +1,30 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import {fetchCheeses} from '../actions/cheese.js'
 
-export default function CheeseList(props) {
+export class CheeseList extends React.Component {
 
-  const cheeses = props.cheeses.map((cheese, index) => (
-    <li key={index}>
-      {cheese}
-    </li>
-  ));
+  componentWillMount(){
+    this.props.dispatch(fetchCheeses());
+  }
 
-  return (
-    <ul id="cheeseList" className="cheese-list">
-      {cheeses}
-    </ul>
-  );
+  render(){
+    const cheeses = this.props.cheeses.map((cheese, index) => (
+      <li key={index}>
+        {cheese}
+      </li>
+    ));
+
+    return (
+      <ul id="cheeseList" className="cheese-list">
+        {cheeses}
+      </ul>
+    );
+  }
 }
+
+const mapStateToProps = state => ({
+  cheeses: state.cheeses
+})
+
+export default connect(mapStateToProps)(CheeseList);
