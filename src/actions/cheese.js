@@ -1,3 +1,5 @@
+
+
 export const FETCH_CHEESES_REQUEST = 'FETCH_CHEESES_REQUEST';
 export const fetchCheesesRequest = () => ({
   type: FETCH_CHEESES_REQUEST
@@ -17,7 +19,7 @@ export const fetchCheesesError = error => ({
 
 export const fetchCheeses = () => dispatch => {
   dispatch(fetchCheesesRequest())
-  return fetch(`http://localhost:8080/api/cheeses`).then(res => {
+  return fetch(`https://cheesehub.herokuapp.com/api/cheeses`).then(res => {
     if (!res.ok) {
       return Promise.reject(res.statusText);
     }
